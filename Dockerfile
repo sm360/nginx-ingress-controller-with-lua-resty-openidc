@@ -12,7 +12,7 @@ RUN apk add luarocks
 RUN luarocks-5.1 install lua-resty-jwt 0.2.0
 
 # https://github.com/zmartzone/lua-resty-openidc
-# This will also install all of its dependencies.
+# This will also install all of its dependencies
 RUN luarocks-5.1 install lua-resty-openidc 1.7.1
 
 USER www-data
