@@ -7,13 +7,15 @@ USER root
 
 RUN apk add lua-dev
 RUN apk add luarocks
+RUN apk add wget
 
-# Needed for the next install
-RUN luarocks-5.1 install lua-resty-jwt 0.2.0
+# https://luarocks.org/modules/cdbattags/lua-resty-jwt
+# This will also install all of its dependencies
+RUN luarocks-5.1 install lua-resty-jwt 0.2.3
 
 # https://github.com/zmartzone/lua-resty-openidc
 # This will also install all of its dependencies
-RUN luarocks-5.1 install lua-resty-openidc 1.7.1
+RUN luarocks-5.1 install lua-resty-openidc 1.7.6
 
 USER www-data
 

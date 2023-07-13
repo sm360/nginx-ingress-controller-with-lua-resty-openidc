@@ -1,7 +1,6 @@
-# Choose the official NGINX Ingress controller version you need here : https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md
-BASE_REPO="k8s.gcr.io/ingress-nginx/controller"
-VERSION="v0.49.0"
-
+# Choose the official NGINX Ingress controller version you need here : https://github.com/kubernetes/ingress-nginx/releases
+BASE_REPO="registry.k8s.io/ingress-nginx/controller"
+VERSION="v1.8.1"
 YOUR_HUB="TYPE_YOUR_HUB"
 
 build:

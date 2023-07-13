@@ -1,16 +1,18 @@
 image: docker:latest
 
 variables:
-  # Choose the official NGINX Ingress controller version you need here : https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md
-  BASE_REPO: "k8s.gcr.io/ingress-nginx/controller"
-  VERSION: "v0.49.3"
+  # Choose the official NGINX Ingress controller version you need here : https://github.com/kubernetes/ingress-nginx/releases
+  BASE_REPO: "registry.k8s.io/ingress-nginx/controller"
+  VERSION: "v1.8.1"
   YOUR_HUB: "TYPE_YOUR_HUB"
 
 build:
   stage: build
   script:
-    - docker build --pull -f Dockerfile -t ${YOUR_HUB}/nginx-ingress-controller:${VERSION}-${CI_PIPELINE_IID} . --build-arg BASE_REPO=${BASE_REPO} --build-arg VERSION=${VERSION}
-    - docker push ${YOUR_HUB}/nginx-ingress-controller:${VERSION}-${CI_PIPELINE_IID}
+    - docker build --pull -f Dockerfile -t ${YOUR_HUB}/nginx-ingress-controller:${VERSION}-${CI_PIPELINE_IID}-${CI_COMMIT_SHORT_SHA} . --build-arg BASE_REPO=${BASE_REPO} --build-arg VERSION=${VERSION}
+    - docker push ${YOUR_HUB}/nginx-ingress-controller:${VERSION}-${CI_PIPELINE_IID}-${CI_COMMIT_SHORT_SHA}
+    - docker tag ${YOUR_HUB}/nginx-ingress-controller:${VERSION}-${CI_PIPELINE_IID}-${CI_COMMIT_SHORT_SHA} ${YOUR_HUB}/nginx-ingress-controller:${VERSION}
+    - docker push ${YOUR_HUB}/nginx-ingress-controller:${VERSION}
   before_script:
     - docker login -u "${YOUR_USERNAME}" -p "${YOUR_PASSWORD}"
   when: manual
