@@ -15,7 +15,7 @@ RUN luarocks-5.1 install lua-resty-jwt 0.2.3
 
 # https://github.com/zmartzone/lua-resty-openidc
 # This will also install all of its dependencies
-RUN luarocks-5.1 install lua-resty-openidc 1.7.6
+RUN luarocks-5.1 install lua-resty-openidc 1.8.0
 
 USER www-data
 
